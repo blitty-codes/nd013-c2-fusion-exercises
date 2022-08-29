@@ -56,6 +56,7 @@ def print_pitch_resolution(frame, lidar_name):
 
     # load range image
     lidar = [obj for obj in frame.lasers if obj.name == lidar_name][0] # get laser data structure from frame
+    ri = []
     if len(lidar.ri_return1.range_image_compressed) > 0: # use first response
         ri = dataset_pb2.MatrixFloat()
         ri.ParseFromString(zlib.decompress(lidar.ri_return1.range_image_compressed))
