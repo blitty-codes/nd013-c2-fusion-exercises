@@ -42,7 +42,7 @@ def render_obj_over_bev(detections, lidar_bev_labels, configs, vis=False):
 
 
 
-# Example C2-4-3 : Display label bounding boxes on top of bev map
+# Example C2-4-3 : Display label bo unding boxes on top of bev map
 def render_bb_over_bev(bev_map, labels, configs, vis=False):
 
     # convert BEV map from tensor to numpy array
