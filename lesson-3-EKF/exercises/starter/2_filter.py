@@ -8,34 +8,30 @@ class Filter:
     def __init__(self):
         self.dim_state = 4 # process model dimension
         self.dt = 0.1 # time increment
-        self.q=0.1 # process noise variable for Kalman filter Q
+        self.q = 0.1 # process noise variable for Kalman filter Q
 
     def F(self):
         # system matrix
-
-        ############
-        # TODO: implement and return F
-        ############
-        
-        pass
+        return np.matrix([[1, 0, self.dt, 0],
+                          [0, 1, 0, self.dt],
+                          [0, 0, 1, 0],
+                          [0, 0, 0, 1]])
 
     def Q(self):
         # process noise covariance Q
+        eq1 = self.dt * self.q
+        eq2 = 1/2 * (self.dt ** 2) * self.q
+        eq3 = 1/3 * (self.dt ** 3) * self.q
 
-        ############
-        # TODO: implement and return Q
-        ############
-        
-        pass
+        return np.matrix([[eq3, 0, eq2, 0],
+                          [0, eq3, 0, eq2],
+                          [eq2, 0, eq1, 0],
+                          [0, eq2, 0, eq1]])
     
     def H(self):
         # measurement matrix H
-
-        ############
-        # TODO: implement and return H
-        ############
-    
-        pass
+        return np.matrix([[1, 0, 0, 0],
+                          [0, 1, 0, 0]])
     
     def predict(self, x, P):
         # predict state and estimation error covariance to next timestep

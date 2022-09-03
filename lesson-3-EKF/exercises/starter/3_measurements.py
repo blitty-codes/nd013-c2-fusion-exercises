@@ -16,9 +16,12 @@ class Camera:
         # calculate nonlinear measurement expectation value h(x)   
         hx = np.zeros((2,1))
 
-        ############
-        # TODO: implement and return h(x)
-        ############
+        if x[0] == 0:
+            assert 'Jacobian not defined for x[0]=0!'
+        else:
+            hx[0, 0] = self.c_i - self.f_i * x[1] / x[0]  # project to image coordinates
+            hx[1, 0] = self.c_j - self.f_j * x[2] / x[0]
+            return hx
         
         return hx
     
@@ -26,10 +29,16 @@ class Camera:
         # calculate Jacobian H at current x from h(x)
         H = np.matrix(np.zeros((2, 6)))
 
-        ############
-        # TODO: implement and return H
-        ############ 
-        
+        # check and print error message if dividing by zero
+        if x[0] == 0:
+            assert 'Jacobian not defined for x[0]=0!'
+        else:
+            H[0, 0] = self.f_i * x[1] / (x[0] ** 2)
+            H[1, 0] = self.f_j * x[2] / (x[0] ** 2)
+            H[0, 1] = -self.f_i / x[0]
+            H[1, 2] = -self.f_j / x[0]
+            return H
+
         return H
  
  
